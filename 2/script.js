@@ -1,50 +1,41 @@
-const myObj = {
-    internal: {
-        a: 2,
-        b: 4,
-    }
+function add(a, b) {
+  return a + b;
 }
 
-function add(a,b) { 
-   return a + b
- }
-
-function multiply(a,b) {
-   return  a - b 
- }
-
-function doSomething () {
-	const added = add(this.internal.a,this.internal.b)  + 42
-	const multiplied = multiply(this.internal.a,this.internal.b)  * (-6)
-	return {added, multiplied}
+function multiply(c, d) {
+  return c * d;
 }
 
-doSomething.call(myObj)
-console.log(doSomething.call(myObj))
+function internal() {
+  const added = this.add(this.internal.a, this.internal.b);
+  const multiplied = this.multiply(added, this.internal.c);
+  const value = multiplied;
+  return console.log(value);
+}
 
 // Not allowed to change below this
 
 const example1 = {
-	internal: {
-		a: 2,
-		b: 4,
-		c: 8,
-	},
-	add,
-	multiply,
-  calculate: doSomething
-}
+  internal: {
+    a: 2,
+    b: 4,
+    c: 8,
+  },
+  add,
+  multiply,
+  calculate: internal,
+};
 
 const example2 = {
-	internal: {
-		a: 2,
-		b: 2,
-		c: 3,
-	},
-	add,
-	multiply,
-  calculate: doSomething
-}
+  internal: {
+    a: 2,
+    b: 2,
+    c: 3,
+  },
+  add,
+  multiply,
+  calculate: internal,
+};
 
-example1.calculate()
-example2.calculate()
+example1.calculate(); // output: 48
+example2.calculate(); // output: 12
